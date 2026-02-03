@@ -38,7 +38,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <x-input-label for="level" :value="__('Nivel de Poder')" class="text-gray-300" />
-                            <x-text-input id="level" name="level" type="number" min="1" class="mt-1 block w-full bg-gray-800 text-white border-red-900" required />
+                            <x-text-input id="level" name="level" type="number" min="1" class="mt-1 block w-full bg-gray-800 text-white border-red-900" aria-placeholder="0-100" />
                         </div>
 
                         <div>
@@ -50,6 +50,10 @@
                     <div class="flex items-center">
                         <input id="is_elderly" name="is_elderly" type="checkbox" value="1" class="rounded bg-gray-800 border-red-900 text-red-600 shadow-sm focus:ring-red-500">
                         <label for="is_elderly" class="ml-2 text-sm text-gray-400">{{ __('¿Es un anciano del culto?') }}</label>
+                    </div>
+
+                    <div class="flex items-center">
+                        <!--Devuelve el error-->
                     </div>
 
                     <div class="flex items-center justify-end mt-4">

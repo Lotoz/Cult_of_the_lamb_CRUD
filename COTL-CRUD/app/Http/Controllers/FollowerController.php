@@ -26,17 +26,20 @@ class FollowerController extends Controller
             'name' => 'required|string|max:100',
             'species' => 'required|string',
             'level' => 'required|integer|min:1',
-            'loyalty_points' => 'required|integer|min:0',
+            'loyalty_points' => 'required|integer|min:0|max:100',
             'is_elderly' => 'boolean',
             'joined_at' => 'required|date',
         ]);
+        try {
+            // Forzar el booleano si no viene en el request (checkbox)
+            $validated['is_elderly'] = $request->has('is_elderly');
 
-        // Forzar el booleano si no viene en el request (checkbox)
-        $validated['is_elderly'] = $request->has('is_elderly');
+            $request->user()->followers()->create($validated);
 
-        $request->user()->followers()->create($validated);
-
-        return redirect()->route('followers.index')->with('success', '¡Adepto reclutado!');
+            return redirect()->route('followers.index')->with('success', '¡Adepto reclutado!');
+        } catch (\Throwable $th) {
+            return back()->withErrors(['error' => 'No se pudo crear el adepto.']);
+        }
     }
     public function edit(Request $request, Follower $follower)
     {
@@ -59,7 +62,7 @@ class FollowerController extends Controller
             'name' => 'required|string|max:100',
             'species' => 'required|string',
             'level' => 'required|integer|min:1',
-            'loyalty_points' => 'required|integer|min:0',
+            'loyalty_points' => 'required|integer|min:0|max:100',
             'joined_at' => 'required|date',
         ]);
 
