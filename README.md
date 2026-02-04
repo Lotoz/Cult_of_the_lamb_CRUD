@@ -60,7 +60,7 @@ Sigue estos pasos para levantar el proyecto desde cero.
 
 ```bash
 git clone [https://github.com/Lotoz/COTL_CRUD.git](https://github.com/Lotoz/COTL_CRUD.git)
-cd COTL_CRUD
+cd COTL-CRUD
 ```
 
 ### 2. Instalar Dependencias (Generar carpeta vendor)

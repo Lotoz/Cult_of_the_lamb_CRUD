@@ -61,7 +61,7 @@ Follow these steps to bring up the project from scratch.
 
 ```bash
 git clone https://github.com/Lotoz/COTL_CRUD.git
-cd COTL_CRUD
+cd COTL-CRUD
 ```
 
 ### 2. Install Dependencies (Generate vendor folder)
