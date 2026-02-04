@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-bold text-2xl text-red-600 leading-tight uppercase tracking-widest">
-            {{ __('Santuario del Culto') }}
+            {{ __('Cult Sanctuary') }}
         </h2>
     </x-slot>
 
@@ -26,13 +26,13 @@
                             {{ $greeting }}
                         </h1>
                         <p class="text-red-500 mt-2 italic text-lg">
-                            "Tu culto tiene actualmente {{ Auth::user()->followers->count() }} adeptos bajo tu mando."
+                            "Your cult currently has {{ Auth::user()->followers->count() }} followers under your command."
                         </p>
                     </div>
 
                     <div class="mt-8">
                         <a href="{{ route('followers.index') }}" class="inline-flex items-center px-6 py-3 bg-red-800 border border-red-500 rounded-full font-bold text-white uppercase tracking-widest hover:bg-red-600 transition-all duration-300 shadow-[0_0_15px_rgba(220,38,38,0.3)]">
-                            Gestionar mi Culto
+                            Manage My Cult
                         </a>
                     </div>
                 </div>

@@ -1,33 +1,50 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-red-600 leading-tight uppercase tracking-tighter">
-            {{ __('Realizar Ritual de Modificación: ') }} <span class="text-white">{{ $follower->name }}</span>
+        <h2 class="font-semibold text-xl text-purple-500 leading-tight uppercase tracking-widest">
+            {{ __('Modification Ritual:') }} <span class="text-white">{{ $follower->name }}</span>
         </h2>
     </x-slot>
 
     <div class="py-12 bg-black min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
             <div class="mb-4">
-                <a href="{{ route('followers.index') }}" class="text-gray-400 hover:text-white transition text-sm flex items-center">
-                    ← Volver al Culto
+                <a href="{{ route('followers.index') }}" class="text-gray-500 hover:text-purple-400 transition text-sm flex items-center uppercase tracking-tighter">
+                    ← Back to the Temple
                 </a>
             </div>
 
-            <div class="bg-gray-900 overflow-hidden shadow-2xl sm:rounded-lg p-8 border-2 border-red-800">
+            @if ($errors->any())
+            <div class="mb-6 p-4 bg-purple-900/30 border border-purple-500 text-purple-200 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                <p class="font-bold mb-2 uppercase text-xs tracking-widest">Ritual Failed:</p>
+                <ul class="list-disc pl-5 text-sm">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
 
-                <form method="POST" action="{{ route('followers.update', $follower) }}" class="space-y-6">
+            <div class="bg-gray-900 overflow-hidden shadow-2xl sm:rounded-lg p-8 border border-purple-900/50 relative">
+                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl"></div>
+
+                <form method="POST" action="{{ route('followers.update', $follower) }}" class="space-y-6 relative">
                     @csrf
-                    @method('PATCH') <div>
-                        <x-input-label for="name" :value="__('Nombre del Adepto')" class="text-gray-400" />
-                        <x-text-input id="name" name="name" type="text" class="mt-1 block w-full bg-gray-800 text-white border-red-900 focus:border-red-500 focus:ring-red-500"
-                            value="{{ old('name', $follower->name) }}" required />
+                    @method('PATCH')
+
+                    <div>
+                        <x-input-label for="name" :value="__('Follower Name')" class="text-purple-300 uppercase text-xs" />
+                        <x-text-input id="name" name="name" type="text"
+                            class="mt-1 block w-full bg-black border-purple-900 text-white focus:border-purple-500 focus:ring-purple-500"
+                            :value="old('name', $follower->name)" required />
                         <x-input-error class="mt-2" :messages="$errors->get('name')" />
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <x-input-label for="species" :value="__('Especie')" class="text-gray-400" />
-                            <select id="species" name="species" class="mt-1 block w-full bg-gray-800 text-white border-red-900 rounded-md shadow-sm focus:border-red-500 focus:ring-red-500">
+                            <x-input-label for="species" :value="__('Species')" class="text-purple-300 uppercase text-xs" />
+                            <select id="species" name="species"
+                                class="mt-1 block w-full bg-black border-purple-900 text-white rounded-md shadow-sm focus:border-purple-500 focus:ring-purple-500">
                                 @foreach(['Cat', 'Deer', 'Pig', 'Dog', 'Wolf', 'Spider', 'Rabbit', 'Squid', 'Frog', 'Crocodile'] as $species)
                                 <option value="{{ $species }}" {{ old('species', $follower->species) == $species ? 'selected' : '' }}>
                                     {{ $species }}
@@ -37,38 +54,42 @@
                         </div>
 
                         <div>
-                            <x-input-label for="joined_at" :value="__('Fecha de Adhesión')" class="text-gray-400" />
-                            <x-text-input id="joined_at" name="joined_at" type="date" class="mt-1 block w-full bg-gray-800 text-white border-red-900 focus:border-red-500 focus:ring-red-500"
-                                value="{{ old('joined_at', $follower->joined_at->format('Y-m-d')) }}" required />
+                            <x-input-label for="joined_at" :value="__('Date of Allegiance')" class="text-purple-300 uppercase text-xs" />
+                            <x-text-input id="joined_at" name="joined_at" type="date"
+                                class="mt-1 block w-full bg-black border-purple-900 text-white focus:border-purple-500 focus:ring-purple-500"
+                                :value="old('joined_at', $follower->joined_at->format('Y-m-d'))"
+                                required />
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <x-input-label for="level" :value="__('Nivel de Poder')" class="text-gray-400" />
-                            <x-text-input id="level" name="level" type="number" min="1" class="mt-1 block w-full bg-gray-800 text-white border-red-900 focus:border-red-500 focus:ring-red-500"
-                                value="{{ old('level', $follower->level) }}" required />
+                            <x-input-label for="level" :value="__('Power Level (Max 100)')" class="text-purple-300 uppercase text-xs" />
+                            <x-text-input id="level" name="level" type="number"
+                                class="mt-1 block w-full bg-black border-purple-900 text-white focus:border-purple-500 focus:ring-purple-500"
+                                :value="old('level', $follower->level)" required />
                         </div>
 
                         <div>
-                            <x-input-label for="loyalty_points" :value="__('Puntos de Lealtad')" class="text-gray-400" />
-                            <x-text-input id="loyalty_points" name="loyalty_points" type="number" min="0" class="mt-1 block w-full bg-gray-800 text-white border-red-900 focus:border-red-500 focus:ring-red-500"
-                                value="{{ old('loyalty_points', $follower->loyalty_points) }}" required />
+                            <x-input-label for="loyalty_points" :value="__('Loyalty Points (0-100)')" class="text-purple-300 uppercase text-xs" />
+                            <x-text-input id="loyalty_points" name="loyalty_points" type="number"
+                                class="mt-1 block w-full bg-black border-purple-900 text-white focus:border-purple-500 focus:ring-purple-500"
+                                :value="old('loyalty_points', $follower->loyalty_points)" required />
                         </div>
                     </div>
 
-                    <div class="flex items-center p-4 bg-gray-800/50 rounded-lg border border-red-900/30">
+                    <div class="flex items-center p-4 bg-black/40 rounded-lg border border-purple-900/30">
                         <input id="is_elderly" name="is_elderly" type="checkbox" value="1"
                             {{ old('is_elderly', $follower->is_elderly) ? 'checked' : '' }}
-                            class="rounded bg-gray-900 border-red-900 text-red-600 shadow-sm focus:ring-red-500">
-                        <label for="is_elderly" class="ml-2 text-sm text-gray-400">
-                            {{ __('El adepto ha envejecido (Marcar como Anciano)') }}
+                            class="rounded bg-black border-purple-900 text-purple-600 shadow-sm focus:ring-purple-500">
+                        <label for="is_elderly" class="ml-2 text-sm text-purple-400">
+                            {{ __('This follower has reached old age (Elder Status)') }}
                         </label>
                     </div>
 
-                    <div class="flex items-center justify-end mt-4 pt-4 border-t border-red-900/50">
-                        <x-primary-button class="ml-4 bg-red-800 hover:bg-red-600 text-white border border-red-500">
-                            {{ __('Actualizar Adepto') }}
+                    <div class="flex items-center justify-end mt-4 pt-6 border-t border-purple-900/20">
+                        <x-primary-button class="ml-4 bg-purple-800 hover:bg-purple-600 text-white border border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)] transition-all">
+                            {{ __('Seal Changes') }}
                         </x-primary-button>
                     </div>
                 </form>

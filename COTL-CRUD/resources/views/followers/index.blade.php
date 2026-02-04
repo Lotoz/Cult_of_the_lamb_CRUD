@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-bold text-2xl text-red-600 leading-tight uppercase tracking-widest">
-                {{ __('Adeptos del Culto') }}
+                {{ __('Cult Followers') }}
             </h2>
             <a href="{{ route('followers.create') }}" class="inline-flex items-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 active:bg-red-900 focus:outline-none focus:border-red-900 focus:ring ring-red-300 disabled:opacity-25 transition ease-in-out duration-150">
-                {{ __('Reclutar Nuevo') }}
+                {{ __('Recruit New') }}
             </a>
         </div>
     </x-slot>
@@ -23,12 +23,12 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-red-900 text-white uppercase text-sm leading-normal">
-                            <th class="py-3 px-6">Adepto</th>
-                            <th class="py-3 px-6">Especie</th>
-                            <th class="py-3 px-6 text-center">Nivel</th>
-                            <th class="py-3 px-6 text-center">Lealtad</th>
-                            <th class="py-3 px-6 text-center">Estado</th>
-                            <th class="py-3 px-6 text-center">Acciones</th>
+                            <th class="py-3 px-6">Follower</th>
+                            <th class="py-3 px-6">Species</th>
+                            <th class="py-3 px-6 text-center">Level</th>
+                            <th class="py-3 px-6 text-center">Loyalty</th>
+                            <th class="py-3 px-6 text-center">Status</th>
+                            <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-300 text-sm font-light">
@@ -50,9 +50,9 @@
                             </td>
                             <td class="py-3 px-6 text-center">
                                 @if($follower->is_elderly)
-                                <span class="text-gray-500 italic">Anciano</span>
+                                <span class="text-gray-500 italic">Elder</span>
                                 @else
-                                <span class="text-green-500">Joven</span>
+                                <span class="text-green-500">Young</span>
                                 @endif
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -63,7 +63,7 @@
                                         </svg>
                                     </a>
 
-                                    <form action="{{ route('followers.destroy', $follower) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres sacrificar a {{ $follower->name }}?')">
+                                    <form action="{{ route('followers.destroy', $follower) }}" method="POST" onsubmit="return confirm('Are you sure you want to sacrifice {{ $follower->name }}?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:text-red-400 transform hover:scale-110">
@@ -78,7 +78,7 @@
                         @empty
                         <tr>
                             <td colspan="6" class="py-10 text-center text-gray-500 uppercase tracking-widest">
-                                Tu culto está vacío. Sal a reclutar nuevos adeptos.
+                                Your cult is empty. Go forth and recruit new followers.
                             </td>
                         </tr>
                         @endforelse

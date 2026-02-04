@@ -34,8 +34,8 @@
             </h2>
             <p class="text-gray-400 text-lg mt-4 font-light">
                 Development of
-                <a href="https://github.com/TU_USUARIO" target="_blank" class="text-red-500 hover:text-white border-b border-red-900 hover:border-white transition-all duration-500 italic px-1">
-                    {Lotoz}
+                <a href="https://github.com/Lotoz" target="_blank" class="text-red-500 hover:text-white border-b border-red-900 hover:border-white transition-all duration-500 italic px-1">
+                    Lotoz
                 </a>
             </p>
         </div>
