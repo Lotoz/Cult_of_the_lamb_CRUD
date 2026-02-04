@@ -2,19 +2,33 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Follower;
 
+/**
+ * User
+ *
+ * Model representing a user (cult leader) in the application.
+ * A user can own multiple followers and is responsible for managing them.
+ *
+ * @property int $id Unique identifier of the user
+ * @property string $name Name of the user
+ * @property string $email Unique email address of the user
+ * @property string $password Hashed password of the user
+ * @property \Carbon\Carbon|null $email_verified_at Email verification date
+ * @property string|null $remember_token Remember me token
+ *
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Attributes that can be mass assigned.
      *
      * @var list<string>
      */
@@ -25,7 +39,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Attributes that should be hidden when serializing the model (JSON, array).
      *
      * @var list<string>
      */
@@ -35,9 +49,13 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Define attribute casting for this model.
      *
-     * @return array<string, string>
+     * Specifies how Laravel should interpret the data:
+     * - 'email_verified_at' is cast to datetime for date handling
+     * - 'password' is automatically hashed when saved
+     *
+     * @return array<string, string> Array with casting rules
      */
     protected function casts(): array
     {
@@ -46,8 +64,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     /**
-     * Relación: Un Líder tiene muchos Seguidores
+     * Relationship: A user (leader) can have many followers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function followers()
     {
