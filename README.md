@@ -37,15 +37,15 @@ Antes de empezar, asegúrate de tener instalada la base de Docker. No necesitas 
 ### 🪟 Windows
 
 1. **Docker Desktop** instalado y corriendo.
-2. **WSL2 (Windows Subsystem for Linux)** instalado (Recomendado: Ubuntu).
-   - *Nota:* Se recomienda encarecidamente usar la terminal de **WSL2 (Ubuntu)** para ejecutar los comandos de Linux. Si prefieres usar **PowerShell**, sigue las instrucciones específicas más abajo.
+2. **WSL2 (Windows Subsystem for Linux)** instalado (Recomendado: Debian).
+   - *Nota:* Se recomienda encarecidamente usar la terminal de **WSL2 (Debian)** para ejecutar los comandos de Linux. Si prefieres usar **PowerShell**, sigue las instrucciones específicas más abajo.
 
 ### 🍎 Mac (macOS)
 
 1. **Docker Desktop** para Mac instalado.
 2. Terminal estándar (zsh).
 
-### 🐧 Linux (Ubuntu/Debian/Arch)
+### 🐧 Linux (Debian/Debian/Arch)
 
 1. **Docker Engine** y **Docker Compose** instalados.
 2. Tu usuario debe estar en el grupo `docker` (para ejecutar sin `sudo`).
@@ -67,7 +67,7 @@ cd COTL-CRUD
 
 > ⚠️ Paso Crítico: Como la carpeta vendor no se sube a GitHub, necesitamos generarla usando un contenedor temporal de Docker antes de poder usar Sail.
 
-#### 👉 Opción A: Linux, macOS o Windows (Terminal WSL2 - Ubuntu) Copia y pega este bloque en tu terminal
+#### 👉 Opción A: Linux, macOS o Windows (Terminal WSL2 - Debian) Copia y pega este bloque en tu terminal
 
 ```bash
 docker run --rm \
@@ -118,7 +118,9 @@ docker compose up -d
 
 ### 5. Configuración Final
 
-Una vez los contenedores estén corriendo (verifícalo con ./vendor/bin/sail ps), ejecuta estos comandos para finalizar el ritual:
+Una vez los contenedores estén corriendo (verifícalo con `./vendor/bin/sail ps`), ejecuta estos comandos para finalizar el ritual:
+
+#### Linux, macOS o Windows (Terminal WSL2 - Debian)
 
 ```bash
 # 1. Generar la llave de encriptación de la app
@@ -132,6 +134,22 @@ Una vez los contenedores estén corriendo (verifícalo con ./vendor/bin/sail ps)
 
 # 4. Compilar los estilos (Assets)
 ./vendor/bin/sail npm run dev
+```
+
+#### En PowerShell de Windows
+
+```powershell
+# 1. Generar la llave de encriptación de la app
+docker compose run --rm laravel.test php artisan key:generate
+
+# 2. Ejecutar migraciones y crear los líderes (Seeders)
+docker compose run --rm laravel.test php artisan migrate --seed
+
+# 3. Instalar dependencias de Frontend (Tailwind/Vite)
+docker compose run --rm laravel.test npm install
+
+# 4. Compilar los estilos (Assets)
+docker compose run --rm laravel.test npm run dev
 ```
 
 ### 6. Acceder a la Aplicación

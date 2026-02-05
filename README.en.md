@@ -121,7 +121,9 @@ docker compose up -d
 
 ### 5. Final Configuration
 
-Once the containers are running (verify with ./vendor/bin/sail ps), run these commands to finish the ritual:
+Once the containers are running (verify with `./vendor/bin/sail ps`), run these commands to finish the ritual:
+
+#### On Linux, Mac, and WSL2
 
 ```bash
 # 1. Generate the app encryption key
@@ -135,6 +137,22 @@ Once the containers are running (verify with ./vendor/bin/sail ps), run these co
 
 # 4. Compile styles (Assets)
 ./vendor/bin/sail npm run dev
+```
+
+#### On Windows PowerShell
+
+```powershell
+# 1. Generate the app encryption key
+docker compose run --rm laravel.test php artisan key:generate
+
+# 2. Run migrations and create the leaders (Seeders)
+docker compose run --rm laravel.test php artisan migrate --seed
+
+# 3. Install frontend dependencies (Tailwind/Vite)
+docker compose run --rm laravel.test npm install
+
+# 4. Compile styles (Assets)
+docker compose run --rm laravel.test npm run dev
 ```
 
 ### 6. Access the Application

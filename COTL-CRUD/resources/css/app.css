@@ -19,7 +19,6 @@ select {
 input:focus,
 select:focus {
     border-color: #a855f7 !important;
-    /* purple-500 */
     --tw-ring-color: #a855f7 !important;
     box-shadow: 0 0 0 1px #a855f7 !important;
     outline: none !important;
