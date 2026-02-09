@@ -216,6 +216,33 @@ Ejecuta este comando en tu PowerShell:
 function sail { sh vendor/bin/sail $args }
 ```
 
+### 🐑 Capturas
+
+#### Welcome Page Animada
+![Welcome Page](./pictures/welcome.gif)
+
+#### Dashboard Dinámico
+![Dashboard](./pictures/lamb.gif)
+![Dashboard2](./pictures/goat.gif)
+
+### Login Personalizado
+![Login](./pictures/login.png)
+
+### Registro con Elección de Leader
+![Register](./pictures/register.png)
+
+### CRUD de Seguidores
+![CRUD](./pictures/crud.gif)
+
+### Crud creacion 
+![Crud](./pictures/crud2.gif)
+
+### Crud edicion
+![Crud](./pictures/crud3.gif)
+
+### Profile user
+![Profile](./pictures/profile.png)
+
 ## 📄 Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
