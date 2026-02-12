@@ -59,8 +59,8 @@ Sigue estos pasos para levantar el proyecto desde cero.
 ### 1. Clonar el Repositorio
 
 ```bash
-git clone [https://github.com/Lotoz/COTL_CRUD.git](https://github.com/Lotoz/COTL_CRUD.git)
-cd COTL-CRUD
+git clone https://github.com/Lotoz/COTL_CRUD.git
+cd Cult_of_the_lamb_CRUD/COTL-CRUD/
 ```
 
 ### 2. Instalar Dependencias (Generar carpeta vendor)
@@ -232,16 +232,17 @@ function sail { sh vendor/bin/sail $args }
 ![Register](./pictures/register.png)
 
 ### CRUD de Seguidores
-![CRUD](./pictures/crud.gif)
+![CRUD](./pictures/crud.png)
 
 ### Crud creacion 
-![Crud](./pictures/crud2.gif)
+![Crud](./pictures/create.png)
 
 ### Crud edicion
-![Crud](./pictures/crud3.gif)
+![Crud](./pictures/edit.png)
 
 ### Profile user
-![Profile](./pictures/profile.png)
+![Profile](./pictures/leaderprofile1.png)
+![Profile](./pictures/leaderprofile2.png)
 
 ## 📄 Licencia
 

@@ -17,59 +17,78 @@ The project simulates the management of a cult, allowing you to recruit, edit, a
 - ✅ **Secure CRUD**: Complete follower management (Create, Read, Update, Delete) with authorship protection (a leader cannot sacrifice other people's followers).
 - 👤 **Dynamic Leaders**: Dashboard that changes aesthetics between **The Lamb** (Red Theme) and **The Goat** (Purple Theme).
 - 🔐 **Authentication**: Thematic access and registration system via Laravel Breeze.
-- 🐳 **Containerization**: Standardized development environment with Laravel Sail.
-- 🎨 **Cult Interface**: Dark design with Tailwind CSS, animations, custom inputs, and game assets.
+````markdown
+# 🐑 Cult of the Lamb CRUD
+
+> ⚠️ This application is inspired by the video game **Cult of the Lamb** and is an educational project to practice **Laravel**, **Breeze**, and **Docker**.
+
+## 🇪🇸 Readme (Español)
+
+This is the English version of the README. For the Spanish version, see [README.md](README.md).
+
+## 📚 Description
+
+An application developed with **Laravel** and **Laravel Sail** for containerized deployment. It uses **Breeze** for authentication and a custom "Dark/Void" aesthetic inspired by the game to manage a CRUD of followers.
+
+The project simulates managing a cult: recruit, edit and sacrifice followers, with an interface that adapts depending on the leader that logs in.
+
+## 🚀 Main Features
+
+- ✅ **Secure CRUD**: Full follower management (Create, Read, Update, Delete) with authorship protection (a leader cannot sacrifice other leaders' followers).
+- 👤 **Dynamic Leaders**: Dashboard switches between **The Lamb** (red theme) and **The Goat** (purple theme).
+- 🔐 **Authentication**: Thematic login/register using Laravel Breeze.
+- 🐳 **Containerization**: Development environment with Laravel Sail and Docker.
+- 🎨 **Cult Interface**: Dark UI with Tailwind CSS, animations, custom inputs, and game assets.
 
 ## 🛠️ Technology Stack
 
 - **Backend**: Laravel 11/12 (PHP 8.2+)
-- **Frontend**: Blade Templates, Tailwind CSS (Vite)
+- **Frontend**: Blade templates, Tailwind CSS (Vite)
 - **Database**: MySQL 8.0
-- **Container**: Docker & Laravel Sail
+- **Containers**: Docker & Laravel Sail
 - **Authentication**: Laravel Breeze
-- **Package Managers**: Composer, NPM
+- **Package managers**: Composer, NPM
 
 ---
 
 ## 📦 Prerequisites by Operating System
 
-Before you start, make sure you have Docker installed. You don't need to install PHP or Composer on your local machine.
+Make sure Docker is installed. You don't need PHP or Composer locally (Sail runs inside containers).
 
 ### 🪟 Windows
 
 1. **Docker Desktop** installed and running.
-2. **WSL2 (Windows Subsystem for Linux)** installed (Recommended: Ubuntu).
-   - *Note:* It is highly recommended to use the **WSL2 (Ubuntu)** terminal to run Linux commands. If you prefer to use **PowerShell**, follow the specific instructions below.
+2. **WSL2 (Windows Subsystem for Linux)** installed (Recommended: Debian/Ubuntu).
+   - Note: using the WSL2 terminal is recommended for Linux-style commands. If you prefer PowerShell, follow the Windows instructions below.
 
-### 🍎 Mac (macOS)
+### 🍎 macOS
 
 1. **Docker Desktop** for Mac installed.
-2. Standard terminal (zsh).
+2. Standard terminal (zsh) available.
 
-### 🐧 Linux (Ubuntu/Debian/Arch)
+### 🐧 Linux (Debian/Ubuntu/Arch)
 
 1. **Docker Engine** and **Docker Compose** installed.
-2. Your user must be in the `docker` group (to run without `sudo`).
+2. Your user should be in the `docker` group to run commands without `sudo`.
 
 ---
 
-## 🚀 Installation Ritual (Getting Started Guide)
+## 🚀 Installation Ritual (Getting Started)
 
-Follow these steps to bring up the project from scratch.
+Follow these steps to bring the project up from scratch.
 
-### 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Lotoz/COTL_CRUD.git
-cd COTL-CRUD
+cd Cult_of_the_lamb_CRUD/COTL-CRUD/
 ```
 
-### 2. Install Dependencies (Generate vendor folder)
+### 2. Install dependencies (generate `vendor`)
 
-> ⚠️ Critical Step: Since the vendor folder is not uploaded to GitHub, we need to generate it using a temporary Docker container before we can use Sail.
+⚠️ Critical: The `vendor` directory is not included in the repo. Generate it using a temporary Docker container before using Sail.
 
-#### 👉 Option A: Linux, macOS, or Windows (WSL2 Terminal - Ubuntu)
-Copy and paste this block in your terminal
+#### Option A — Linux / macOS / WSL2 (recommended)
 
 ```bash
 docker run --rm \
@@ -80,8 +99,7 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
-#### 👉 Option B: Windows (PowerShell only)
-If you are not using WSL and are in PowerShell, use this command
+#### Option B — Windows PowerShell (no WSL)
 
 ```powershell
 docker run --rm `
@@ -91,140 +109,113 @@ docker run --rm `
     composer install --ignore-platform-reqs
 ```
 
-### 3. Configure Environment
-
-Copy the example environment file and generate an application key:
+### 3. Configure environment
 
 ```bash
 cp .env.example .env
 ```
 
-### 4. Start the Cult (Start Docker)
-
-Now that we have the dependencies, we can bring up the containers.
-
-#### On Linux, Mac, and WSL2
+### 4. Start the cult (bring up Docker)
 
 ```bash
 ./vendor/bin/sail up -d
 ```
 
-#### On Windows PowerShell
+On Windows PowerShell, if you have PHP locally installed use `php vendor/bin/sail up -d`; otherwise run `docker compose up -d`.
 
-```powershell
-# If you have PHP installed locally:
-php vendor/bin/sail up -d
+### 5. Final configuration
 
-# If you do NOT have PHP local, use docker compose directly:
-docker compose up -d
-```
-
-### 5. Final Configuration
-
-Once the containers are running (verify with `./vendor/bin/sail ps`), run these commands to finish the ritual:
-
-#### On Linux, Mac, and WSL2
+Once containers are running (`./vendor/bin/sail ps`), finish setup:
 
 ```bash
-# 1. Generate the app encryption key
+# 1. Generate application key
 ./vendor/bin/sail artisan key:generate
 
-# 2. Run migrations and create the leaders (Seeders)
+# 2. Run migrations and seed initial leaders
 ./vendor/bin/sail artisan migrate --seed
 
-# 3. Install frontend dependencies (Tailwind/Vite)
+# 3. Install frontend dependencies
 ./vendor/bin/sail npm install
 
-# 4. Compile styles (Assets)
+# 4. Compile assets (dev)
 ./vendor/bin/sail npm run dev
 ```
 
-#### On Windows PowerShell
+Windows PowerShell equivalents using `docker compose run --rm laravel.test` are provided in the Spanish README.
 
-```powershell
-# 1. Generate the app encryption key
-docker compose run --rm laravel.test php artisan key:generate
+### 6. Access the application
 
-# 2. Run migrations and create the leaders (Seeders)
-docker compose run --rm laravel.test php artisan migrate --seed
+Open your browser at: http://localhost
 
-# 3. Install frontend dependencies (Tailwind/Vite)
-docker compose run --rm laravel.test npm install
-
-# 4. Compile styles (Assets)
-docker compose run --rm laravel.test npm run dev
-```
-
-### 6. Access the Application
-
-Open your browser and visit [http://localhost](http://localhost)
-
-## 🔐 Cult Credentials
+## 🔐 Default credentials
 
 | Email         | Password    |
 |---------------|-------------|
 | lamb@cult.com | password123 |
 | goat@cult.com | password123 |
 
-> **Note:** You can register new users. When you do, you can choose whether your nature is "Lamb" or "Goat" in the registration form.
+Note: You can register new users and choose your leader type (`Lamb` or `Goat`).
 
-## 📁 Project Structure
+## 📁 Project structure
 
 ```text
 📁 COTL-CRUD
 ├── 📁 app/
-│   ├── 📁 Http/Controllers/   # FollowerController (Secure CRUD Logic)
-│   └── 📁 Models/             # User and Follower Models
+│   ├── 📁 Http/Controllers/   # FollowerController (secure CRUD logic)
+│   └── 📁 Models/             # User and Follower models
 ├── 📁 database/
-│   └── 📁 seeders/            # DatabaseSeeder (Creates Lamb and Goat)
-├── 📁 public/img/             # Assets (Gifs and Leader Avatars)
+│   └── 📁 seeders/            # DatabaseSeeder (creates Lamb and Goat)
+├── 📁 public/img/             # Assets (gifs and leader avatars)
 ├── 📁 resources/views/
-│   ├── 📁 auth/               # Custom Login/Register (Dark Aesthetic)
-│   ├── 📁 followers/          # CRUD Views (Index, Create, Edit)
+│   ├── 📁 auth/               # Custom login/register (dark aesthetic)
+│   ├── 📁 followers/          # CRUD views (index, create, edit)
 │   ├── 📄 dashboard.blade.php # Dynamic main panel
-│   └── 📄 welcome.blade.php   # Animated Landing Page
+│   └── 📄 welcome.blade.php   # Animated landing page
 ├── 📝 docker-compose.yml      # Sail services configuration
-└── 📝 README.md               # Documentation
+└── 📝 README.md               # Spanish README
 ```
 
-## 🐳 Useful Laravel Sail Commands
+## 🐳 Useful Sail commands
 
-For ease of use, it is recommended to set up an alias (see below). If you don't use an alias, remember that you must write `./vendor/bin/sail` before each command (or `vendor\bin\sail` in Windows PowerShell).
+If you don't create an alias, prefix Sail commands with `./vendor/bin/sail`.
 
-| Action | Command (With Alias) | Full Command (Without Alias) |
-| :--- | :--- | :--- |
-| **Start** (Background) | `sail up -d` | `./vendor/bin/sail up -d` |
-| **Stop** (Turn off) | `sail stop` | `./vendor/bin/sail stop` |
-| **Delete everything** (Volumes) | `sail down -v` | `./vendor/bin/sail down -v` |
-| **View Logs** | `sail logs -f` | `./vendor/bin/sail logs -f` |
-| **Enter container** | `sail shell` | `./vendor/bin/sail shell` |
-| **Run Artisan** | `sail artisan <command>` | `./vendor/bin/sail artisan <command>` |
-| **Compile Assets (Dev)** | `sail npm run dev` | `./vendor/bin/sail npm run dev` |
+| Action | Command (alias) | Full command |
+|---|---:|---|
+| Start (background) | `sail up -d` | `./vendor/bin/sail up -d` |
+| Stop | `sail stop` | `./vendor/bin/sail stop` |
+| Remove volumes | `sail down -v` | `./vendor/bin/sail down -v` |
+| View logs | `sail logs -f` | `./vendor/bin/sail logs -f` |
+| Enter container | `sail shell` | `./vendor/bin/sail shell` |
+| Run Artisan | `sail artisan <command>` | `./vendor/bin/sail artisan <command>` |
+| Compile assets (dev) | `sail npm run dev` | `./vendor/bin/sail npm run dev` |
 
-### 💡 Tip: How to create the "sail" Alias
+### Tip: create the `sail` alias
 
-To avoid having to write `./vendor/bin/sail` all the time:
-
-**On Linux / Mac / WSL2:**
-Run this command in your terminal:
+On Linux / macOS / WSL2:
 
 ```bash
 alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 ```
 
-**On Windows PowerShell:**
-Run this command in your PowerShell:
+On Windows PowerShell:
 
 ```powershell
 function sail { sh vendor/bin/sail $args }
 ```
 
+### Screenshots
+
+Welcome page and dashboard GIFs/screenshots are in the `pictures/` folder and referenced in `README.md`.
+
 ## 📄 License
 
-This project is under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under MIT. See [LICENSE](LICENSE) for details.
 
 ---
 
 Made with 🐑 by [Lotoz](https://github.com/Lotoz).
 May your cult prosper!
-Based on the video game Cult of the Lamb - Educational Project
+Based on the video game Cult of the Lamb — educational project.
+
+````
+
